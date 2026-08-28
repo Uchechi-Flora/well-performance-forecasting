@@ -53,6 +53,44 @@ def predict_next_month_xgboost(model, oil_hist):
     Builds the same feature structure used during XGBoost training
     and predicts the next month's oil rate.
 
+    Training defines, for a row at month_index M: lag_1/2/3 = oil at
+    M-1/M-2/M-3, rolling_avg_3 = mean(M-1,M-2,M-3), target = oil at M+1.
+    So to predict the next unseen month N, the row's own month_index
+    must be M = N - 1, and the lags reach one month further back than
+    "the 3 most recent known months."
+
+    oil_hist is ordered oldest -> newest; oil_hist[-1] is month M
+    (the most recent month we actually have data for, i.e. N - 1).
+    """
+
+    if len(oil_hist) < 4:
+        raise ValueError(
+            "XGBoost requires at least 4 months of oil history "
+            "to construct the required lag features."
+        )
+
+    M = len(oil_hist) - 1  # the row's own month_index (N - 1)
+
+    lag_1 = oil_hist[-2]
+    lag_2 = oil_hist[-3]
+    lag_3 = oil_hist[-4]
+
+    feature_row = pd.DataFrame([{
+        "well_id": None,  # filled in by caller
+        "lag_1": lag_1,
+        "lag_2": lag_2,
+        "lag_3": lag_3,
+        "rolling_avg_3": np.mean([lag_1, lag_2, lag_3]),
+        "month_index": M,
+    }])
+
+    return feature_row
+'''
+def predict_next_month_xgboost(model, oil_hist):
+    """
+    Builds the same feature structure used during XGBoost training
+    and predicts the next month's oil rate.
+
     Training features:
         well_id
         lag_1
@@ -87,7 +125,7 @@ def predict_next_month_xgboost(model, oil_hist):
     }])
 
     return feature_row
-
+'''
 
 def predict_xgboost(model, well_id, oil_hist):
     """
