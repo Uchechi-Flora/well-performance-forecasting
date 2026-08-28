@@ -1,0 +1,68 @@
+```yaml
+name: WPFI Monthly Production Update
+
+on:
+  schedule:
+    # Runs at 00:00 UTC on the 1st day of every month
+    - cron: "0 0 1 * *"
+
+  # Allows manual triggering from GitHub for testing
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  monthly-update:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # ---------------------------------------------------------
+      # 1. Get the repository
+      # ---------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------------------------------------------------
+      # 2. Set up Python
+      # ---------------------------------------------------------
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # ---------------------------------------------------------
+      # 3. Install dependencies
+      # ---------------------------------------------------------
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-train.txt
+
+      # ---------------------------------------------------------
+      # 4. Run the monthly production update
+      # ---------------------------------------------------------
+      - name: Run monthly update
+        run: |
+          python scripts/run_monthly_update.py
+
+      # ---------------------------------------------------------
+      # 5. Save the updated database back to GitHub
+      # ---------------------------------------------------------
+      - name: Commit updated database
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/wpfi.db
+
+          if git diff --cached --quiet; then
+            echo "No database changes to commit."
+          else
+            git commit -m "Automated monthly production update"
+            git push
+          fi
+```
