@@ -84,6 +84,156 @@ table.wpfi-table th { background: var(--olive); color: #000000; text-align: left
 table.wpfi-table td { padding: 9px 14px; color: var(--charcoal); white-space: nowrap; }
 table.wpfi-table tr:nth-child(odd)  td { background: var(--row-olive-light); }
 table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light); }
+/* ============================================================
+   MOBILE RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 768px) {
+
+    /* ---------------------------------------------------------
+       1. MOBILE BACKGROUND
+       Streamlit can apply its own dark background on mobile.
+       Explicitly force the app canvas and main containers white.
+       --------------------------------------------------------- */
+    html,
+    body,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stApp"],
+    [data-testid="stMain"],
+    [data-testid="stHeader"] {
+        background-color: #FFFFFF !important;
+    }
+
+    /* Keep the main content white */
+    .block-container {
+        background-color: #FFFFFF !important;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       2. MOBILE NAVIGATION
+       Keep every navigation item on one line.
+       --------------------------------------------------------- */
+    .wpfi-nav {
+        width: 100%;
+        padding: 14px 0;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .wpfi-nav > div:first-child {
+        flex-shrink: 0;
+    }
+
+    .wpfi-nav .mark {
+        font-size: 16px;
+    }
+
+    .wpfi-nav .sub {
+        display: none;
+    }
+
+    .wpfi-nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .wpfi-nav-links a {
+        margin-left: 0;
+        font-size: 11px;
+        white-space: nowrap;
+        padding-bottom: 3px;
+    }
+
+
+    /* ---------------------------------------------------------
+       3. MOBILE HERO
+       Prevent the large desktop heading from dominating.
+       --------------------------------------------------------- */
+    .wpfi-h1 {
+        font-size: 28px;
+        line-height: 1.15;
+    }
+
+    .wpfi-subtitle {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+
+    /* ---------------------------------------------------------
+       4. MOBILE CARDS
+       More spacing between cards when Streamlit stacks columns.
+       --------------------------------------------------------- */
+    .wpfi-card {
+        padding: 22px;
+        margin-bottom: 18px;
+        height: auto;
+    }
+
+    .how-section {
+        padding: 32px 22px;
+        margin: 24px 0;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 28px;
+    }
+
+
+    /* ---------------------------------------------------------
+       5. MOBILE STAT CARDS
+       Give each stacked statistic more breathing room.
+       --------------------------------------------------------- */
+    .stat-box {
+        padding: 20px 10px;
+        margin-bottom: 14px;
+    }
+
+    .stat-box .num {
+        font-size: 32px;
+    }
+
+
+    /* ---------------------------------------------------------
+       6. MOBILE EXPLORE SECTION
+       Add vertical separation when the 3 columns stack.
+       --------------------------------------------------------- */
+    .wpfi-card + .wpfi-card {
+        margin-top: 16px;
+    }
+
+
+    /* ---------------------------------------------------------
+       7. MOBILE ARTICLE CALLOUT
+       --------------------------------------------------------- */
+    .article-callout {
+        padding: 34px 22px;
+        margin: 24px 0;
+    }
+
+
+    /* ---------------------------------------------------------
+       8. MOBILE TABLES
+       Allow tables to scroll horizontally rather than
+       breaking the page layout.
+       --------------------------------------------------------- */
+    .wpfi-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table.wpfi-table {
+        min-width: 650px;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
