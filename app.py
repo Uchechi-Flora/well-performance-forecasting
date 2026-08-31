@@ -47,7 +47,7 @@ st.markdown("""
 }
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--charcoal); }
 #MainMenu, footer, header {visibility: hidden;}
-.block-container { padding-top: 0 !important; max-width: 1100px; }
+.block-container { padding-top: 0 !important; max-width: 1100px;  padding-bottom: 0 !important;}
 .wpfi-nav {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 4px; border-bottom: 1px solid var(--border); margin-bottom: 10px;
