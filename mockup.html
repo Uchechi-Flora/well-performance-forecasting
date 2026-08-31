@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WPFI — Homepage Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --olive: #556B2F;
+    --olive-dark: #40521f;
+    --sage: #DCE5D4;
+    --sage-line: #C9D6BE;
+    --terracotta: #C96F4A;
+    --terracotta-dark: #b25e3b;
+    --charcoal: #29302A;
+    --muted: #68736A;
+    --border: #E5EAE2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--charcoal);
+    background: var(--white);
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+  }
+  .nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-brand .mark { font-weight: 700; letter-spacing: 0.06em; color: var(--olive); font-size: 18px; }
+  .nav-brand .sub { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--charcoal); position: relative; padding-bottom: 4px; }
+  .nav-links a:hover { color: var(--olive); }
+  .nav-links a.active { color: var(--olive); }
+  .nav-links a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--terracotta);
+  }
+
+  /* HERO */
+  .hero {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px;
+    align-items: center;
+    padding: 88px 48px 72px;
+    max-width: 1240px; margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--olive);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em;
+    color: var(--charcoal); margin-bottom: 22px;
+  }
+  .hero p {
+    font-size: 16.5px; color: var(--muted); max-width: 480px; margin-bottom: 32px;
+  }
+  .cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--terracotta); color: white; font-weight: 600; font-size: 14.5px;
+    padding: 13px 26px; border-radius: 6px; display: inline-block;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); }
+  .link-secondary { font-size: 14.5px; font-weight: 600; color: var(--olive); border-bottom: 1px solid var(--olive); padding-bottom: 2px; }
+
+  .hero-visual {
+    background: var(--sage); border: 1px solid var(--sage-line); border-radius: 14px;
+    padding: 28px; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .hero-visual .cap { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--olive); text-transform: uppercase; }
+  .legend { display: flex; gap: 18px; font-size: 12px; color: var(--muted); margin-top: 14px; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+  /* STATS */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    max-width: 1240px; margin: 0 auto; padding: 0 48px 80px;
+    gap: 24px;
+  }
+  .stat { text-align: center; padding: 28px 12px; border-top: 3px solid var(--olive); }
+  .stat .num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--olive); }
+  .stat .label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* HOW IT WORKS */
+  .how { background: var(--sage); padding: 80px 48px; }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700;
+    text-align: center; margin-bottom: 48px; color: var(--charcoal);
+  }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .step .step-num { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--terracotta); font-weight: 700; margin-bottom: 10px; }
+  .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: 14.5px; color: var(--muted); }
+  .step-flow { text-align: center; margin-top: 40px; font-size: 13px; color: var(--olive); font-weight: 600; letter-spacing: 0.03em; }
+
+  /* EXPLORE CARDS */
+  .explore { max-width: 1240px; margin: 0 auto; padding: 88px 48px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 28px;
+    background: var(--white); transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { box-shadow: 0 8px 24px rgba(41,48,42,0.08); transform: translateY(-2px); }
+  .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--olive); }
+  .card p { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+  .card .explore-link { font-size: 13.5px; font-weight: 700; color: var(--terracotta); }
+
+  /* ARTICLE CALLOUT */
+  .article-callout {
+    background: var(--olive); color: white; text-align: center;
+    padding: 64px 48px;
+  }
+  .article-callout h3 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 14px; }
+  .article-callout p { color: #DCE5D4; font-size: 14.5px; margin-bottom: 22px; }
+  .article-callout a { font-weight: 700; color: #F5D9C8; border-bottom: 1px solid #F5D9C8; padding-bottom: 2px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal); color: #9AA394; text-align: center;
+    padding: 28px 48px; font-size: 13px;
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 56px 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); padding: 0 24px 56px; }
+    .steps { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .nav { padding: 14px 20px; }
+    .nav-links { gap: 18px; font-size: 13px; }
+    .hero h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="mark">WPFI</span>
+      <span class="sub">Well Performance Forecasting Intelligence</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Overview</a>
+      <a href="#">Wells</a>
+      <a href="#">Forecasts</a>
+      <a href="#">Data Quality</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Well Performance Forecasting Intelligence</div>
+      <h1>Predicting what a well does next.</h1>
+      <p>WPFI uses production history, decline-curve analysis, and machine learning to forecast future well performance and flag changes that may need attention — updated automatically every month.</p>
+      <div class="cta-row">
+        <a href="#" class="btn-primary">Explore the Wells →</a>
+        <a href="#" class="link-secondary">Read the methodology</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="cap">Oil Production — Well 08</div>
+      <svg viewBox="0 0 400 200" width="100%" height="200">
+        <polyline points="10,40 60,55 110,72 160,90 200,105"
+                  fill="none" stroke="#556B2F" stroke-width="3" stroke-linecap="round"/>
+        <polyline points="200,105 240,116 280,126 320,134 360,140 390,145"
+                  fill="none" stroke="#C96F4A" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+        <circle cx="200" cy="105" r="4" fill="#29302A"/>
+      </svg>
+      <div class="legend">
+        <span><span class="dot" style="background:#556B2F"></span>Historical</span>
+        <span><span class="dot" style="background:#C96F4A"></span>Forecast</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="num">18</div><div class="label">Wells Analyzed</div></div>
+    <div class="stat"><div class="num">24+</div><div class="label">Months History</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Forecasting Approaches</div></div>
+    <div class="stat"><div class="num">12</div><div class="label">Month Forecast Horizon</div></div>
+  </div>
+
+  <section class="how">
+    <div class="how-inner">
+      <div class="section-title">How WPFI Works</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Analyze</h3>
+          <p>Production history is evaluated to understand each well's decline behavior and any operational events.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Select</h3>
+          <p>Arps decline-curve analysis and XGBoost are compared per well; the better-performing approach is selected.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Forecast</h3>
+          <p>The selected model generates the next month's forecast automatically as new production data arrives.</p>
+        </div>
+      </div>
+      <div class="step-flow">Production Data → Model Selection → Forecast</div>
+    </div>
+  </section>
+
+  <section class="explore">
+    <div class="section-title">Explore WPFI</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Wells</h3>
+        <p>Explore individual well performance, production history, and which model was selected for each well.</p>
+        <a href="#" class="explore-link">Explore →</a>
+      </div>
+      <div class="card">
+        <h3>Forecasts</h3>
+        <p>View projected production and compare forecast performance across all 18 wells.</p>
+        <a href="#" class="explore-link">Explore →</a>
+      </div>
+      <div class="card">
+        <h3>Data Quality</h3>
+        <p>See how the underlying production data is checked before it feeds the forecasting pipeline.</p>
+        <a href="#" class="explore-link">Explore →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-callout">
+    <h3>Want to see how it was built?</h3>
+    <p>From synthetic production data to automated model selection and monthly forecasting, read the full methodology behind WPFI.</p>
+    <a href="#">Read the article →</a>
+  </section>
+
+  <footer>
+    Built by Nwokocha Uchechi Flora &nbsp;·&nbsp; © 2026
+  </footer>
+
+</body>
+</html>
