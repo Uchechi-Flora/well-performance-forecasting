@@ -233,7 +233,6 @@ table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light)
     table.wpfi-table {
         min-width: 650px;
     }
-}
 </style>
 """, unsafe_allow_html=True)
 
