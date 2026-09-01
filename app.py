@@ -117,6 +117,10 @@ table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light)
     .wpfi-card {
         margin-bottom: 18px;
     }
+     /* Prevent footer from creating a strange empty area */
+    .wpfi-footer {
+        margin-bottom: 0 !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
