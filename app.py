@@ -52,7 +52,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--ch
 .block-container { padding-top: 0 !important; max-width: 1100px; }
 .wpfi-nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 4px; border-bottom: 1px solid var(--border); margin-bottom: 10px;
+    padding: 16px 4px; border-bottom: 1px solid var(--border); margin-bottom: 10px; 
 }
 .wpfi-nav .mark { font-weight: 700; letter-spacing: 0.06em; color: var(--olive); font-size: 18px; }
 .wpfi-nav .sub { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
@@ -86,6 +86,38 @@ table.wpfi-table th { background: var(--olive); color: #000000; text-align: left
 table.wpfi-table td { padding: 9px 14px; color: var(--charcoal); white-space: nowrap; }
 table.wpfi-table tr:nth-child(odd)  td { background: var(--row-olive-light); }
 table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light); }
+/* MOBILE ONLY */
+@media (max-width: 768px) {
+    /* Make the mobile app background white */
+    html,
+    body,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stApp"] {
+        background-color: #FFFFFF !important;
+    }
+    /* Hide the long subtitle only on mobile */
+    .wpfi-nav .sub {
+        display: none;
+    }
+    /* Keep navigation items on one line */
+    .wpfi-nav-links {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    .wpfi-nav-links a {
+        margin-left: 0;
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-size: 12px;
+    }
+    /* More space between cards on mobile */
+    .wpfi-card {
+        margin-bottom: 18px;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
