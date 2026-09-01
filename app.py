@@ -71,7 +71,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--ch
 .step-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
 .step-desc { font-size: 14px; color: var(--muted); }
 .step-flow { text-align: center; margin-top: 32px; font-size: 13px; color: var(--olive); font-weight: 600; }
-.wpfi-card { border: 1px solid var(--border); border-radius: 12px; padding: 26px; background: var(--white); height: 100%; }
+.wpfi-card { border: 1px solid var(--border); border-radius: 12px; padding: 26px; background: var(--white); height: 100%; min-height: 216px; }
 .wpfi-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--olive); }
 .wpfi-card p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .wpfi-card .explore-link { font-size: 13.5px; font-weight: 700; color: var(--terracotta); }
