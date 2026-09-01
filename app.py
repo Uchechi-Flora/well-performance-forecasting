@@ -74,7 +74,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--ch
 .wpfi-card { border: 1px solid var(--border); border-radius: 12px; padding: 26px; background: var(--white); height: 100%; min-height: 216px; }
 .wpfi-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--olive); }
 .wpfi-card p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
-.wpfi-card .explore-link { font-size: 13.5px; font-weight: 700; color: var(--terracotta); }
+.wpfi-card .explore-link { font-size: 13.5px; font-weight: 700; color: var(--terracotta); margin-top: auto; }
 .article-callout { background: var(--olive); color: white; text-align: center; padding: 48px 32px; border-radius: 14px; margin: 32px 0; }
 .article-callout h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 12px; }
 .article-callout p { color: var(--sage); font-size: 14px; margin-bottom: 18px; }
