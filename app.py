@@ -11,6 +11,8 @@ import sys
 import sqlite3
 import io
 import warnings
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 import numpy as np
 import pandas as pd
@@ -47,7 +49,7 @@ st.markdown("""
 }
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--charcoal); }
 #MainMenu, footer, header {visibility: hidden;}
-.block-container { padding-top: 0 !important; max-width: 1100px;  padding-bottom: 0 !important;}
+.block-container { padding-top: 0 !important; max-width: 1100px; }
 .wpfi-nav {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 4px; border-bottom: 1px solid var(--border); margin-bottom: 10px;
@@ -69,7 +71,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--ch
 .step-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
 .step-desc { font-size: 14px; color: var(--muted); }
 .step-flow { text-align: center; margin-top: 32px; font-size: 13px; color: var(--olive); font-weight: 600; }
-.wpfi-card { border: 1px solid var(--border); border-radius: 12px; padding: 26px; background: var(--white); height: 100%; min-height:216px;  box-sizing: border-box;}
+.wpfi-card { border: 1px solid var(--border); border-radius: 12px; padding: 26px; background: var(--white); height: 100%; }
 .wpfi-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--olive); }
 .wpfi-card p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .wpfi-card .explore-link { font-size: 13.5px; font-weight: 700; color: var(--terracotta); }
@@ -84,155 +86,6 @@ table.wpfi-table th { background: var(--olive); color: #000000; text-align: left
 table.wpfi-table td { padding: 9px 14px; color: var(--charcoal); white-space: nowrap; }
 table.wpfi-table tr:nth-child(odd)  td { background: var(--row-olive-light); }
 table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light); }
-/* ============================================================
-   MOBILE RESPONSIVE DESIGN
-   ============================================================ */
-@media (max-width: 768px) {
-
-    /* ---------------------------------------------------------
-       1. MOBILE BACKGROUND
-       Streamlit can apply its own dark background on mobile.
-       Explicitly force the app canvas and main containers white.
-       --------------------------------------------------------- */
-    html,
-    body,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stApp"],
-    [data-testid="stMain"],
-    [data-testid="stHeader"] {
-        background-color: #FFFFFF !important;
-    }
-
-    /* Keep the main content white */
-    .block-container {
-        background-color: #FFFFFF !important;
-        padding-left: 18px !important;
-        padding-right: 18px !important;
-    }
-
-
-    /* ---------------------------------------------------------
-       2. MOBILE NAVIGATION
-       Keep every navigation item on one line.
-       --------------------------------------------------------- */
-    .wpfi-nav {
-        width: 100%;
-        padding: 14px 0;
-        gap: 12px;
-        align-items: center;
-    }
-
-    .wpfi-nav > div:first-child {
-        flex-shrink: 0;
-    }
-
-    .wpfi-nav .mark {
-        font-size: 16px;
-    }
-
-    .wpfi-nav .sub {
-        display: none;
-    }
-
-    .wpfi-nav-links {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        white-space: nowrap;
-        gap: 12px;
-        min-width: 0;
-    }
-
-    .wpfi-nav-links a {
-        margin-left: 0;
-        font-size: 11px;
-        white-space: nowrap;
-        padding-bottom: 3px;
-    }
-
-
-    /* ---------------------------------------------------------
-       3. MOBILE HERO
-       Prevent the large desktop heading from dominating.
-       --------------------------------------------------------- */
-    .wpfi-h1 {
-        font-size: 28px;
-        line-height: 1.15;
-    }
-
-    .wpfi-subtitle {
-        font-size: 14px;
-        line-height: 1.55;
-    }
-
-
-    /* ---------------------------------------------------------
-       4. MOBILE CARDS
-       More spacing between cards when Streamlit stacks columns.
-       --------------------------------------------------------- */
-    .wpfi-card {
-        padding: 22px;
-        margin-bottom: 18px;
-        height: auto;
-    }
-
-    .how-section {
-        padding: 32px 22px;
-        margin: 24px 0;
-    }
-
-    .section-title {
-        font-size: 24px;
-        margin-bottom: 28px;
-    }
-
-
-    /* ---------------------------------------------------------
-       5. MOBILE STAT CARDS
-       Give each stacked statistic more breathing room.
-       --------------------------------------------------------- */
-    .stat-box {
-        padding: 20px 10px;
-        margin-bottom: 14px;
-    }
-
-    .stat-box .num {
-        font-size: 32px;
-    }
-
-
-    /* ---------------------------------------------------------
-       6. MOBILE EXPLORE SECTION
-       Add vertical separation when the 3 columns stack.
-       --------------------------------------------------------- */
-    .wpfi-card + .wpfi-card {
-        margin-top: 16px;
-    }
-
-
-    /* ---------------------------------------------------------
-       7. MOBILE ARTICLE CALLOUT
-       --------------------------------------------------------- */
-    .article-callout {
-        padding: 34px 22px;
-        margin: 24px 0;
-    }
-
-
-    /* ---------------------------------------------------------
-       8. MOBILE TABLES
-       Allow tables to scroll horizontally rather than
-       breaking the page layout.
-       --------------------------------------------------------- */
-    .wpfi-table-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    table.wpfi-table {
-        min-width: 650px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -386,7 +239,7 @@ def page_overview():
         <h3>Want to see how it was built?</h3>
         <p>From synthetic production data to automated model selection and monthly
         forecasting, read the full methodology behind WPFI.</p>
-        <a href="https://medium.com/@Nwokocha_Uchechi_Flora/forecasting-the-future-of-an-oil-well-inside-my-automated-well-performance-forecasting-system-bb525ee95046">Read the article →</a>
+        <a href="#">Read the article →</a>
     </div>
     <div class="wpfi-footer">Built by Nwokocha Uchechi Flora &nbsp;·&nbsp; © 2026</div>
     """, unsafe_allow_html=True)
@@ -435,9 +288,14 @@ def page_forecasts():
     render_nav()
     render_back_link()
     st.markdown('<div class="wpfi-h1">Forecasts</div>', unsafe_allow_html=True)
-    st.markdown('<p class="wpfi-subtitle">A 12-month forward projection and estimated ultimate recovery '
-                '(EUR) for every well, using whichever model was proven most accurate for it.</p>',
-                unsafe_allow_html=True)
+    st.markdown(
+        '<p class="wpfi-subtitle">A 12-month forward projection and estimated ultimate recovery '
+        '(EUR) for every well, using whichever model was proven most accurate for it. '
+        '"12-Month Forecast" shows how many barrels of oil each well is expected to produce '
+        '<b>per month</b>, 12 months from now — not a total sum over the year. For a full '
+        'month-by-month breakdown of each well\'s next 12 months, download the PDF report below.</p>',
+        unsafe_allow_html=True
+    )
 
     conn = sqlite3.connect(DB_PATH)
     wells = load_wells()
@@ -462,7 +320,7 @@ def page_forecasts():
         rows.append({
             "Well": w["well_name"], "Location": w["location"], "Model": selected_model,
             "Latest Actual": round(latest_actual, 1), "12-Month Forecast": round(forecast_end, 1),
-            "% Change": f"{pct_change:.1f}%", "EUR (est.)": eur_display,
+            "% Change": f"{pct_change:.1f}%", "EUR (Barrels)": eur_display,
         })
     conn.close()
 
@@ -476,15 +334,20 @@ def page_forecasts():
     st.write("")
     st.markdown("#### View a well's forecast chart")
     well_name = st.selectbox("Select a well", wells["well_name"].tolist(), key="forecast_well_select")
-    well_id = int(wells[wells["well_name"] == well_name].iloc[0]["well_id"])
+    well_row_chart = wells[wells["well_name"] == well_name].iloc[0]
+    well_id = int(well_row_chart["well_id"])
     production = load_production(well_id)
     result = forecast_well(production["oil_rate"].values, production["water_rate"].values)
 
+    start_date = date.fromisoformat(well_row_chart["start_date"])
+    hist_dates = [start_date + relativedelta(months=int(m) - 1) for m in production["month_index"]]
+    forecast_dates = [start_date + relativedelta(months=int(m) - 1) for m in result["forecast_months"]]
+
     chart_df = pd.DataFrame({
-        "Month": production["month_index"].tolist() + result["forecast_months"].tolist(),
-        "Oil Rate (Actual)": production["oil_rate"].tolist() + [None] * len(result["forecast_months"]),
+        "Date": hist_dates + forecast_dates,
+        "Oil Rate (Actual)": production["oil_rate"].tolist() + [None] * len(forecast_dates),
         "Oil Rate (Forecast)": [None] * len(production) + result["forecast_values"].tolist(),
-    }).set_index("Month")
+    }).set_index("Date")
     st.line_chart(chart_df, color=["#556B2F", "#C96F4A"])
 
     st.write("")

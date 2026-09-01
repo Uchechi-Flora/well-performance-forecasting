@@ -102,7 +102,7 @@ def _well_section(well_row, production_df, status_row, selected_model, model_map
     ))
 
     table_data = [["Month", "Forecasted Oil Rate"]]
-    for m, v in zip(result["forecast_months"][::2], result["forecast_values"][::2]):
+    for m, v in zip(result["forecast_months"], result["forecast_values"]):
         table_data.append([str(int(m)), f"{v:,.1f}"])
     t = Table(table_data, colWidths=[120, 200])
     t.setStyle(TableStyle([
