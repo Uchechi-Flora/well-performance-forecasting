@@ -134,6 +134,11 @@ def _well_section(well_row, production_df, status_row, selected_model, model_map
         f"{well_row['well_name']}'s Estimated Ultimate Recovery (EUR) is approximately "
         f"<b>{eur_dict['eur_total']:,.0f} barrels</b>.{eur_note}", body
     ))
+    story.append(Paragraph(
+        f"Note: this projects {eur_dict['months_to_limit']} months into the future — until the well "
+        f"is expected to cross its economic limit — not just the 12 months shown in the table above. "
+        f"Summing only those 12 months will give a smaller number than the EUR figure.", body
+    ))
 
     return story
 
