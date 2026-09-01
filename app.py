@@ -79,13 +79,26 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; color: var(--ch
 .article-callout h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 12px; }
 .article-callout p { color: var(--sage); font-size: 14px; margin-bottom: 18px; }
 .article-callout a { font-weight: 700; color: #F5D9C8; }
-.wpfi-footer { background: var(--charcoal); color: #9AA394; text-align: center; padding: 22px; font-size: 13px; border-radius: 10px; margin-top: 24px; }
+.wpfi-footer { background: var(--charcoal); color: #9AA394; text-align: center; padding: 22px; font-size: 13px; border-radius: 10px; margin-top: 24px; margin-bottom: 0 !important; }
 .wpfi-table-wrap { overflow-x: auto; margin: 12px 0 20px; border-radius: 8px; border: 1px solid var(--border); }
 table.wpfi-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 table.wpfi-table th { background: var(--olive); color: #000000; text-align: left; padding: 10px 14px; font-weight: 700; white-space: nowrap; }
 table.wpfi-table td { padding: 9px 14px; color: var(--charcoal); white-space: nowrap; }
 table.wpfi-table tr:nth-child(odd)  td { background: var(--row-olive-light); }
 table.wpfi-table tr:nth-child(even) td { background: var(--row-terracotta-light); }
+/* Remove extra space below the footer */
+.wpfi-footer {
+    margin-bottom: 0 !important;
+}
+.block-container {
+    padding-bottom: 0 !important;
+}
+[data-testid="stAppViewContainer"] {
+    padding-bottom: 0 !important;
+}
+[data-testid="stAppViewBlockContainer"] {
+    padding-bottom: 0 !important;
+}
 /* MOBILE ONLY */
 @media (max-width: 768px) {
     /* Make the mobile app background white */
