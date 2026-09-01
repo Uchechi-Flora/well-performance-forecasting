@@ -239,7 +239,8 @@ def page_overview():
         <h3>Want to see how it was built?</h3>
         <p>From synthetic production data to automated model selection and monthly
         forecasting, read the full methodology behind WPFI.</p>
-        <a href="#">Read the article →</a>
+        <a href="https://medium.com/@Nwokocha_Uchechi_Flora/forecasting-the-future-of-an-oil-well-inside-my-automated-well-performance-forecasting-system-bb525ee95046
+">Read the article →</a>
     </div>
     <div class="wpfi-footer">Built by Nwokocha Uchechi Flora &nbsp;·&nbsp; © 2026</div>
     """, unsafe_allow_html=True)
