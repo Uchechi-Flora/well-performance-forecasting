@@ -11,6 +11,8 @@ import os
 import sys
 import io
 import warnings
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 warnings.filterwarnings("ignore")
 
@@ -102,8 +104,10 @@ def _well_section(well_row, production_df, status_row, selected_model, model_map
     ))
 
     table_data = [["Month", "Forecasted Oil Rate"]]
+    start_date = date.fromisoformat(well_row["start_date"])
     for m, v in zip(result["forecast_months"], result["forecast_values"]):
-        table_data.append([str(int(m)), f"{v:,.1f}"])
+        month_date = start_date + relativedelta(months=int(m) - 1)
+        table_data.append([month_date.strftime("%b %Y"), f"{v:,.1f}"])
     t = Table(table_data, colWidths=[120, 200])
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#556B2F")),
